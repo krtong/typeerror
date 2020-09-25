@@ -4,8 +4,8 @@ const destination = document.getElementById('animatedTextHeading');
 
 const max_font_size = 10;
 const min_font_size = 6;
-const scroll_speed = 4;
-const [canvas_width, canvas_height] = [.4, 1.2]
+const scroll_speed = 1;
+const [canvas_width, canvas_height] = [.7, 1.1]
 const frames_per_second = 17;
 const coin_flip = Math.random();
 
