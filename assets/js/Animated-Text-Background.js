@@ -15,7 +15,6 @@ const reportWindowSize = () => {
     c.height = destination.clientHeight * canvas_height;
     c.width = destination.clientWidth * canvas_width;
     font_size = parseInt(destination.clientWidth / 50);
-    console.log(font_size)
     font_size = font_size > max_font_size ? max_font_size : font_size;
     font_size = font_size < min_font_size ? min_font_size : font_size;
 }
@@ -40,7 +39,6 @@ let arr = [r, g, b]
 arr[Math.floor(Math.random() * 3)] = 255;
 arr[Math.floor(Math.random() * 3)] = 255;
 [r, g, b] = arr;
-console.log({r, g, b})
 const draw = () => {
     let darken = 10;
     let darkenMore = 5
