@@ -89,6 +89,8 @@ setInterval(draw, 1 / frames_per_second * 1000);
 const moveBackground = (e) => {
     mouseXPos = (e.x / window.innerWidth) * 100;
     mouseYPos = (e.y / window.innerHeight) * 100;
+    destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
+
 }
 
 document.body.addEventListener('mousemove', moveBackground);
