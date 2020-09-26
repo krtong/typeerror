@@ -5,8 +5,8 @@ const div = document.getElementById('animatedTextBackground')
 
 const max_font_size = 10;
 const min_font_size = 6;
-const scroll_speed = 1;
-const [canvas_width, canvas_height] = [.4, 1] //if dropping frame rates, make the canvas smaller
+const scroll_speed = 10;
+const [canvas_width, canvas_height] = [.5, 1.2] //if dropping frame rates, make the canvas smaller
 destination.style.backgroundRepeat = 'no-repeat';
 destination.style.backgroundSize = 'cover'
 const frames_per_second = 20;
@@ -21,7 +21,6 @@ const reportWindowSize = () => {
     font_size = parseInt(destination.clientWidth / 50);
     font_size = font_size > max_font_size ? max_font_size : font_size;
     font_size = font_size < min_font_size ? min_font_size : font_size;
-    console.log(c.height, c.width)
 }
 
 reportWindowSize()
@@ -101,8 +100,13 @@ setInterval(checkIfOnScreen, 1 / frames_per_second * 1000);
 
 
 const moveBackground = (e) => {
-    mouseXPos = (e.x / window.innerWidth) * 100;
-    mouseYPos = (e.y / window.innerHeight) * 100;
+    // mouseXPos = (e.x / window.innerWidth) * 100;
+    // mouseYPos = (e.y / window.innerHeight) * 100;
+    // destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
+    // destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
+
+    mouseXPos = (window.innerWidth - e.x)/5
+    mouseYPos =  ( e.y  / window.innerHeight) * 1000
     destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
 
 }
@@ -113,11 +117,9 @@ let nav_skills = document.getElementById('nav-skills');
 let nav_moto = document.getElementById('nav-moto');
 
 let oldColor;
-console.log(nav_info)
 
 const changeColor = (button) => {
     overButton = true;
-    console.log('overmouse')
     if (button === 'nav-info'){
         [r, g, b] = [0, 255, 157];
         nav_info.style.transition = '.5s'
@@ -151,7 +153,6 @@ const changeColor = (button) => {
 };
 
 const endchangeColor = (button) => {
-    console.log('change')
     overButton = false;
     if (button === 'nav-info'){
         nav_info.style.color = oldColor;
@@ -192,4 +193,5 @@ nav_skills.addEventListener('mouseleave', () => endchangeColor('nav-skills'))
 
 nav_moto.addEventListener('mouseover', () => changeColor('nav-moto'))
 nav_moto.addEventListener('mouseleave', () => endchangeColor('nav-moto'))
+
 // document.body.addEventListener('mousemove', moveBackground);

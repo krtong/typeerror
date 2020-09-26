@@ -4,11 +4,12 @@ const navbar = document.getElementById('navbar');
 const navItemArr = document.getElementsByClassName('nav-item');
 const logo = document.getElementById('logo');
 
-const distance = document.getElementById('animatedTextBackground').offsetHeight;
+const distance = document.getElementById('animatedTextBackground').offsetHeight - 20;
 
 [navbar, logo].forEach(({style}) => {
     // style.transition = '1s'
 })
+
 
 const scrollFunction = () => {
     let scrolldist = document.documentElement.scrollTop.toFixed(0);
@@ -18,7 +19,7 @@ const scrollFunction = () => {
     // navbar.style.backgroundColor = `rgba(0,0,100,${(a/1000).toFixed(2)})`;
 
     navbar.style.transition = `600ms`;
-    if (document.body.scrollTop > distance - 150 || document.documentElement.scrollTop > distance - 150) {
+    if (document.body.scrollTop > distance * 2 / 3 || document.documentElement.scrollTop > distance * 2 /3) {
  
         for (let nav_item of navItemArr) {
             nav_item.style.transition = '1s';
@@ -52,4 +53,10 @@ const scrollFunction = () => {
     }
 }
 
+const workInProgress = () =>  {
+    const wipDiv = document.createElement('div');
+    wipDiv.style.display = 'none';
+
+    
+}
 window.onscroll = scrollFunction;
