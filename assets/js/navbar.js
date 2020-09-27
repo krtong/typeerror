@@ -19,7 +19,7 @@ const scrollFunction = () => {
     // navbar.style.backgroundColor = `rgba(0,0,100,${(a/1000).toFixed(2)})`;
 
     navbar.style.transition = `600ms`;
-    if (document.body.scrollTop > distance * 2 / 3 || document.documentElement.scrollTop > distance * 2 /3) {
+    if (document.documentElement.scrollTop > distance * 2 /3) {
  
         for (let nav_item of navItemArr) {
             nav_item.style.transition = '1s';

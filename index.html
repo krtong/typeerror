@@ -18,26 +18,27 @@
 </head>
 
 <body style="background: radial-gradient(rgb(85,71,71) 41%, rgb(68,51,69) 100%), rgb(85,71,71);">
-    <nav class="navbar navbar-light navbar-expand-md fixed-top text-monospace" data-aos="flip-up" data-aos-duration="400" data-aos-once="true" id="navbar" style="width: 100vw;font-family: Lato, sans-serif;min-width: 600px;">
-        <div class="container-fluid"><a class="navbar-brand d-flex flex-grow-1 flex-fill" id="logo" href="#" style="color: rgb(112,206,155);font-size: 2.3vh;padding-left: 20vw;">{<span style="color: rgb(255,255,255);padding: 4px;padding-top: 0;padding-bottom: 0;">kevintong_</span>}</a>
-            <button
-                data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navcol-1" style="width: -5vw;"></div>
-                <ul class="nav navbar-nav d-flex d-sm-none d-md-none d-lg-flex" style="padding-right: 20vw;">
-                    <li class="nav-item"><a class="nav-link link-text" id="nav-info" href="#" style="font-weight: bold;">Info</a></li>
-                    <li class="nav-item"><a class="nav-link link-text" id="nav-work" href="#" style="font-weight: bold;">Work</a></li>
-                    <li class="nav-item"><a class="nav-link link-text" id="nav-portfolio" href="#" style="font-weight: bold;">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link link-text" id="nav-skills" href="#" style="font-weight: bold;">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link link-text" id="nav-moto" href="#" style="font-weight: bold;">Moto</a></li>
-                </ul>
+    <nav class="navbar navbar-light navbar-expand-md fixed-top text-monospace" id="navbar">
+        <div class="container-fluid">
+            <div></div><a class="navbar-brand" id="logo" href="#home" style="color: rgb(112,206,155);font-size: 24px;">{<span style="color: rgb(255,255,255);padding: 4px;padding-top: 0;padding-bottom: 0;">kevintong_</span>}</a>
+            <ul class="nav navbar-nav d-none d-lg-inline-flex">
+                <li class="nav-item"><a class="nav-link link-text js-scroll-trigger" id="nav-info" href="#info">Info</a></li>
+                <li class="nav-item"><a class="nav-link link-text" id="nav-work" href="#work" style="font-weight: bold;">Work</a></li>
+                <li class="nav-item"><a class="nav-link link-text" id="nav-portfolio" href="#portfolio" style="font-weight: bold;">Portfolio</a></li>
+                <li class="nav-item"><a class="nav-link link-text" id="nav-skills" href="#skills" style="font-weight: bold;">Skills</a></li>
+                <li class="nav-item"><a class="nav-link link-text" id="nav-moto" href="#moto" style="font-weight: bold;">Moto</a></li>
+            </ul>
+            <div></div>
         </div>
     </nav>
-    <header style="width: 100%;height: 100vh;">
-        <div class="justify-content-center align-items-center" data-bs-parallax-bg="true" id="animatedTextBackground">
-            <h1 id="animatedTextHeading">type-<br>error</h1>
+    <header id="home" class="container no-gutters" style="width: 100vw;height: 100vh;">
+        <div class="row no-gutters justify-content-center align-items-center" id="animatedTextBackground">
+            <div class="col col-sm-12 col-md-10 col-lg-8">
+                <h1 id="animatedTextHeading" style="color: rgb(0,0,0);background: #000000;">type-<br>error</h1>
+            </div>
         </div>
     </header>
-    <div class="text-monospace d-xl-flex justify-content-xl-center align-items-xl-center footer-dark section-info" id="info" style="color: rgb(24,24,24);background: linear-gradient(rgb(169,195,190) 0%, rgb(160,179,173) 51%, rgb(110,153,162)), #a0b3ad;height: 100vh;">
+    <div class="text-monospace d-xl-flex justify-content-xl-center align-items-xl-center footer-dark section-info" data-aos="fade" data-aos-delay="50" data-aos-once="true" id="info" style="color: rgb(24,24,24);background: linear-gradient(rgb(169,195,190) 0%, rgb(160,179,173) 51%, rgb(110,153,162)), #a0b3ad;height: 100vh;">
         <section style="padding-top: 63px;">
             <div class="container" style="padding-top: 36px;">
                 <div class="row">
@@ -70,7 +71,7 @@
             </div>
         </section>
     </div>
-    <div class="text-monospace d-flex justify-content-xl-center align-items-xl-center footer-dark" data-aos="fade" data-aos-duration="850" data-aos-once="true" id="work" style="background: rgb(218,210,193);">
+    <div class="text-monospace d-flex justify-content-xl-center align-items-xl-center footer-dark" data-aos="fade" data-aos-delay="50" data-aos-once="true" id="work" style="background: rgb(218,210,193);">
         <section class="d-xl-flex align-items-xl-center" style="height: 100vh;">
             <div class="container">
                 <div class="row d-xl-flex align-items-xl-start" style="padding-top: 83px;padding-bottom: 76px;">
@@ -96,7 +97,7 @@
             </div>
         </section>
     </div>
-    <div class="text-monospace d-flex justify-content-xl-center footer-dark section-info" data-aos="fade" data-aos-duration="850" data-aos-offset="700px" data-aos-delay="50" data-aos-once="true" id="portfolio" style="color: rgb(24,24,24);background: linear-gradient(#212b6b, rgb(12,23,36) 100%), #604527;min-height: 100vh;">
+    <div class="text-monospace d-flex justify-content-xl-center footer-dark section-info" data-aos="fade" data-aos-delay="50" data-aos-once="true" id="portfolio" style="color: rgb(24,24,24);background: linear-gradient(#212b6b, rgb(12,23,36) 100%), #604527;min-height: 100vh;">
         <section class="d-xl-flex align-items-xl-center">
             <div class="container d-xl-flex align-items-xl-center" style="padding-top: 91px;">
                 <div class="row">
@@ -150,7 +151,7 @@
             </div>
         </section>
     </div>
-    <div class="text-monospace d-xl-flex justify-content-xl-center align-items-xl-center footer-dark section-info" id="skills" style="background: rgb(60,84,89);min-height: 100vh;">
+    <div class="text-monospace d-xl-flex justify-content-xl-center align-items-xl-center footer-dark section-info" data-aos="fade" data-aos-delay="50" data-aos-once="true" id="skills" style="background: rgb(60,84,89);min-height: 100vh;">
         <section style="padding: 53px;">
             <div class="container">
                 <div class="row">
@@ -170,6 +171,18 @@
                         <h3>WIP</h3>
                         <p></p>
                         <p>This section is a work in progress. This is merely to outline what information needs to still be visually represented.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="text-monospace d-xl-flex justify-content-xl-center align-items-xl-center footer-dark section-info" data-aos="fade" data-aos-delay="50" data-aos-once="true" id="moto" style="background: radial-gradient(rgb(36,90,64) 13%, rgb(39,75,57) 66%, rgb(42,59,50) 90%, rgb(46,42,42) 100%), rgb(60,84,89);min-height: 100vh;">
+        <section style="padding: 53px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h3>Moto</h3>
+                        <p>Under construction...</p>
                     </div>
                 </div>
             </div>
