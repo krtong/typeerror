@@ -7,8 +7,6 @@ const max_font_size = 10;
 const min_font_size = 6;
 const scroll_speed = 10;
 const [canvas_width, canvas_height] = [.5, 1] //if dropping frame rates, make the canvas smaller
-destination.style.backgroundRepeat = 'no-repeat';
-destination.style.backgroundSize = 'cover'
 const frames_per_second = 20;
 const coin_flip = Math.random();
 
@@ -53,6 +51,7 @@ const draw = () => {
     const color = (a, b) => parseInt((a - b) / darken) - darkenMore;
     ctx.fillStyle = `rgba(${color(g, r)}, ${color(b, g)}, ${color(r, b)}, 0.05)`;
     ctx.fillRect(0, 0, c.width, c.height);
+
     const colorShift = (speed, min = 0, max = 255) => {
         if (r < max && g <= min) r += speed;
         if (g < max && b <= min) g += speed;
@@ -61,10 +60,13 @@ const draw = () => {
         if (b >= max && g > min) g -= speed;
         if (r >= max && b > min) b -= speed;
     }
+
     colorShift(1, 40);
+
+
     let fill = `rgb(${r}, ${g}, ${b})`
     const rn2 = (min = -160, max = 160) => parseInt(Math.random() * (max - min) + min);
-    
+
     const colorNoise = (frequency = 1, min = -255, max = 255, a = r, b = g, c = g) => {
         if (Math.random() < frequency) {
             let [R, G, B] = [a, b, c].map(a => Math.abs(a + rn2(min, max)));
@@ -89,27 +91,31 @@ const draw = () => {
     destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
 }
 
+
+const bottom_of_home = document.getElementById('home').offsetHeight;
 const checkIfOnScreen = () => {
-    const scrolldist = document.documentElement.scrollTop.toFixed(0);
-    const divHeight = document.getElementById('animatedTextBackground').offsetHeight;
-    if (divHeight - 120 > scrolldist) draw();
+    const scroll_top = document.documentElement.scrollTop;
+    const scroll_top_II =  document.body.scrollTop;
+    const fraction = 4/6;
+    const scrollHeight = () => scroll_top > bottom_of_home * fraction || scroll_top_II > bottom_of_home * fraction ;
+    if (!scrollHeight()) draw();
 }
 
+const userAgent = window.navigator.userAgent;
 
-setInterval(checkIfOnScreen, 1 / frames_per_second * 1000);
+if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+    destination.style.backgroundColor = 'black';
+} else {
+    setInterval(checkIfOnScreen, 1 / frames_per_second * 1000);
+}
 
 
 const moveBackground = (e) => {
-    // mouseXPos = (e.x / window.innerWidth) * 100;
-    // mouseYPos = (e.y / window.innerHeight) * 100;
-    // destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
-    // destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
-
-    mouseXPos = (window.innerWidth - e.x)/5
-    mouseYPos =  ( e.y  / window.innerHeight) * 1000
+    mouseXPos = (window.innerWidth - e.x) / 5
+    mouseYPos = (e.y / window.innerHeight) * 1000
     destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
-
 }
+
 let nav_info = document.getElementById('nav-info');
 let nav_work = document.getElementById('nav-work');
 let nav_portfolio = document.getElementById('nav-portfolio');
@@ -120,31 +126,31 @@ let oldColor;
 
 const changeColor = (button) => {
     overButton = true;
-    if (button === 'nav-info'){
+    if (button === 'nav-info') {
         [r, g, b] = [0, 255, 157];
         nav_info.style.transition = '.5s'
         oldColor = nav_info.style.color
         nav_info.style.color = `rgb(${r}, ${g}, ${b})`
     }
-    if (button === 'nav-work'){
+    if (button === 'nav-work') {
         [r, g, b] = [255, 187, 0];
         nav_work.style.transition = '.5s'
         oldColor = nav_work.style.color
         nav_work.style.color = `rgb(${r}, ${g}, ${b})`
     }
-    if (button === 'nav-portfolio'){
+    if (button === 'nav-portfolio') {
         [r, g, b] = [255, 0, 205];
         nav_portfolio.style.transition = '.5s'
         oldColor = nav_portfolio.style.color
         nav_portfolio.style.color = `rgb(${r}, ${g}, ${b})`
     }
-    if (button === 'nav-skills'){
+    if (button === 'nav-skills') {
         [r, g, b] = [0, 104, 255];
         nav_skills.style.transition = '.5s'
         oldColor = nav_skills.style.color
         nav_skills.style.color = `rgb(${r}, ${g}, ${b})`
     }
-    if (button === 'nav-moto'){
+    if (button === 'nav-moto') {
         [r, g, b] = [0, 255, 50];
         nav_moto.style.transition = '.5s'
         oldColor = nav_moto.style.color
@@ -154,23 +160,23 @@ const changeColor = (button) => {
 
 const endchangeColor = (button) => {
     overButton = false;
-    if (button === 'nav-info'){
+    if (button === 'nav-info') {
         nav_info.style.color = oldColor;
     }
-    
-    if (button === 'nav-work'){
+
+    if (button === 'nav-work') {
         nav_work.style.color = oldColor;
     }
-    
-    if (button === 'nav-portfolio'){
+
+    if (button === 'nav-portfolio') {
         nav_portfolio.style.color = oldColor;
     }
-    
-    if (button === 'nav-skills'){
+
+    if (button === 'nav-skills') {
         nav_skills.style.color = oldColor;
     }
-    
-    if (button === 'nav-moto'){
+
+    if (button === 'nav-moto') {
         nav_moto.style.color = oldColor;
     }
 

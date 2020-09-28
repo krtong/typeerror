@@ -1,29 +1,35 @@
 const navbar = document.getElementById('navbar');
 // const navLinkArr = document.getElementsByClassName('nav-link');
 
-const navItemArr = document.getElementsByClassName('nav-item');
+const menu_item_array = document.getElementsByClassName('nav-item');
 const logo = document.getElementById('logo');
 
 const distance = document.getElementById('animatedTextBackground').offsetHeight - 20;
 
-[navbar, logo].forEach(({style}) => {
+const bottom_of_header = document.getElementById('home').offsetHeight;
+
+[navbar, logo].forEach(({
+    style
+}) => {
     // style.transition = '1s'
 })
 
 
 const scrollFunction = () => {
-    let scrolldist = document.documentElement.scrollTop.toFixed(0);
-    // transparency = transparency > 100 ? 100 : transparency;
-    // navbar.style.background = `rgba(0,0,0,${transparency})`;
-    // let a = scrolldist > 1000 ? 1000 : scrolldist
-    // navbar.style.backgroundColor = `rgba(0,0,100,${(a/1000).toFixed(2)})`;
+
+    const scroll_top = document.documentElement.scrollTop.toFixed(0);
+    const scroll_top_II = document.body.scrollTop.toFixed(0);
+
 
     navbar.style.transition = `600ms`;
-    if (document.documentElement.scrollTop > distance * 2 /3) {
- 
-        for (let nav_item of navItemArr) {
+
+    const scrollHeight = (fraction = 1) => scroll_top > bottom_of_header * fraction || scroll_top_II > bottom_of_header * fraction;
+
+    if (scrollHeight(2 / 5)) {
+
+        for (let nav_item of menu_item_array) {
             nav_item.style.transition = '1s';
-            
+
             nav_item.style.paddingTop = '0';
             nav_item.style.paddingBottom = '0';
 
@@ -35,7 +41,7 @@ const scrollFunction = () => {
 
     } else {
 
-        for (let nav_item of navItemArr) {
+        for (let nav_item of menu_item_array) {
             nav_item.style.padding = '2vh 1vw 1vw 1vw';
 
             let text = nav_item.children[0]
@@ -44,8 +50,7 @@ const scrollFunction = () => {
         }
     }
 
-    if (document.body.scrollTop > distance || document.documentElement.scrollTop > distance) {
-        
+    if (scrollHeight(1)) {
         navbar.style.backgroundColor = `rgba(0,0,10,1)`;
     } else {
 
@@ -53,10 +58,4 @@ const scrollFunction = () => {
     }
 }
 
-const workInProgress = () =>  {
-    const wipDiv = document.createElement('div');
-    wipDiv.style.display = 'none';
-
-    
-}
 window.onscroll = scrollFunction;
