@@ -104,7 +104,9 @@ const checkIfOnScreen = () => {
 const userAgent = window.navigator.userAgent;
 
 if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-    destination.style.backgroundColor = 'black';
+    destination.style.background = 'url(https://media.giphy.com/media/3ohzdKgSnQwjEbkxry/giphy.gif) center';
+    destination.style.opacity = '0.75'
+    destination.style.backgroundSize = '120%' ;
 } else {
     setInterval(checkIfOnScreen, 1 / frames_per_second * 1000);
 }
