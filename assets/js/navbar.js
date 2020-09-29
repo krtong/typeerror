@@ -4,7 +4,7 @@ const navbar = document.getElementById('navbar');
 const menu_item_array = document.getElementsByClassName('nav-item');
 const logo = document.getElementById('logo');
 
-const distance = document.getElementById('animatedTextBackground').offsetHeight - 20;
+let distance = document.getElementById('animatedTextBackground').offsetHeight - 20;
 
 const bottom_of_header = document.getElementById('home').offsetHeight;
 
@@ -50,7 +50,7 @@ const scrollFunction = () => {
         }
     }
 
-    if (scrollHeight(1)) {
+    if (scrollHeight(7/8)) {
         navbar.style.backgroundColor = `rgba(0,0,10,1)`;
     } else {
 

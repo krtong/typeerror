@@ -17,7 +17,8 @@
   padding: 1vw;
   padding-top: 2vh;
   font-size: 1.9vh;
-  color: rgb(145,167,189);
+  color: rgb(0,0,0) !important;
+  font-weight: 400;
 }
 
 #navbar {
