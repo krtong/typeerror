@@ -1,5 +1,6 @@
 #animatedTextBackground {
   height: 50%;
+  visibility: hidden;
 }
 
 #animatedTextHeading {
