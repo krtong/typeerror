@@ -24,6 +24,7 @@
   
 
 const c = document.createElement("canvas");
+c.style.display = "block";
 const ctx = c.getContext("2d");
 const destination = document.getElementById('animatedTextHeading');
 const div = document.getElementById('animatedTextBackground')
