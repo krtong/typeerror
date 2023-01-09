@@ -1,3 +1,28 @@
+(function() {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+      window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+      window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+  
+    if (!window.requestAnimationFrame)
+      window.requestAnimationFrame = function(callback, element) {
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+        var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+          timeToCall);
+        lastTime = currTime + timeToCall;
+        return id;
+      };
+  
+    if (!window.cancelAnimationFrame)
+      window.cancelAnimationFrame = function(id) {
+        clearTimeout(id);
+      };
+}());
+  
+
 const c = document.createElement("canvas");
 const ctx = c.getContext("2d");
 const destination = document.getElementById('animatedTextHeading');
@@ -9,7 +34,8 @@ const scroll_speed = 10;
 const [canvas_width, canvas_height] = [.5, 1] //if dropping frame rates, make the canvas smaller
 const frames_per_second = 20;
 const coin_flip = Math.random();
-
+let counter = 0;
+let counter2 = 0;
 let mouseXPos, mouseYPos, font_size = max_font_size;
 
 console.log("javascript has updated 2")
@@ -43,8 +69,18 @@ arr[Math.floor(Math.random() * 3)] = 255;
 [r, g, b] = arr;
 
 let overButton = false;
+const FRAME_RATE_LIMIT = 25; // Limit the frame rate to 60 fps
+let previousFrameTime = 0;
 
-const draw = () => {
+function draw() {
+  const currentTime = Date.now();
+  if (currentTime - previousFrameTime < 1000 / FRAME_RATE_LIMIT) {
+    // Skip this frame if the frame rate exceeds the limit
+    counter2++
+    requestAnimationFrame(draw);
+    return;
+  }
+  previousFrameTime = currentTime;
     const darken = 10;
     const darkenMore = 5
     const color = (a, b) => parseInt((a - b) / darken) - darkenMore;
@@ -88,12 +124,16 @@ const draw = () => {
     const bgImage = `url(${c.toDataURL('jpeg/image')}`;
     destination.style.background = bgImage;
     destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
-
+   
     // schedule the next frame to be drawn
-    requestAnimationFrame(draw);
+        // if (counter > )
+       
+        console.log(counter2 / (counter * 20)* 1000); //frame rate is currently around 135-140 FPS. How do i drop the frame rate?
+        requestAnimationFrame(draw);
 }
 
 
+setInterval(() => counter++, 50);
 
 
 // start the animation loop
