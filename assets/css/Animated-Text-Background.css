@@ -10,6 +10,7 @@
   -webkit-background-clip: text;
   -webkit-background-origin: padding-box;
   font-size: 16vmax;
+  transform: translate3d(0,0,0);
   line-height: .8em;
   will-change: transform, opacity;
   letter-spacing: -1vmax;
