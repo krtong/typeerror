@@ -12,6 +12,7 @@ const coin_flip = Math.random();
 
 let mouseXPos, mouseYPos, font_size = max_font_size;
 
+console.log("javascript has updated 2")
 
 const reportWindowSize = () => {
     c.height = destination.clientHeight * canvas_height;
@@ -35,7 +36,6 @@ for (let x = 0; x < columns; x++) {
     drops[x] = 1;
 }
 
-
 let [r, g, b] = [0, 0, 0];
 let arr = [r, g, b]
 arr[Math.floor(Math.random() * 3)] = 255;
@@ -45,7 +45,6 @@ arr[Math.floor(Math.random() * 3)] = 255;
 let overButton = false;
 
 const draw = () => {
-
     const darken = 10;
     const darkenMore = 5
     const color = (a, b) => parseInt((a - b) / darken) - darkenMore;
@@ -58,7 +57,7 @@ const draw = () => {
         if (b < max && r <= min) b += speed;
         if (g >= max && r > min) r -= speed;
         if (b >= max && g > min) g -= speed;
-        if (r >= max && b > min) b -= speed;
+        if (b >= max && r > min) b -= speed;
     }
 
     colorShift(1, 40);
@@ -84,39 +83,22 @@ const draw = () => {
         ctx.fillText(text, i * font_size, drops[i] * font_size);
         if (drops[i] * font_size > c.height && Math.random() > 0.975) drops[i] = 0;
         drops[i]++;
-    };
+    }
 
     const bgImage = `url(${c.toDataURL('jpeg/image')}`;
     destination.style.background = bgImage;
     destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
+
+    // schedule the next frame to be drawn
+    requestAnimationFrame(draw);
 }
 
 
-const bottom_of_home = document.getElementById('home').offsetHeight;
-const checkIfOnScreen = () => {
-    const scroll_top = document.documentElement.scrollTop;
-    const scroll_top_II =  document.body.scrollTop;
-    const fraction = 4/6;
-    const scrollHeight = () => scroll_top > bottom_of_home * fraction || scroll_top_II > bottom_of_home * fraction ;
-    if (!scrollHeight()) draw();
-}
-
-const userAgent = window.navigator.userAgent;
-
-if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-    destination.style.background = 'url(https://media.giphy.com/media/3ohzdKgSnQwjEbkxry/giphy.gif) center';
-    destination.style.opacity = '0.75'
-    destination.style.backgroundSize = '120%' ;
-} else {
-    setInterval(checkIfOnScreen, 1 / frames_per_second * 1000);
-}
 
 
-const moveBackground = (e) => {
-    mouseXPos = (window.innerWidth - e.x) / 5
-    mouseYPos = (e.y / window.innerHeight) * 1000
-    destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
-}
+// start the animation loop
+requestAnimationFrame(draw);
+
 
 let nav_info = document.getElementById('nav-info');
 let nav_work = document.getElementById('nav-work');
@@ -201,5 +183,3 @@ nav_skills.addEventListener('mouseleave', () => endchangeColor('nav-skills'))
 
 nav_moto.addEventListener('mouseover', () => changeColor('nav-moto'))
 nav_moto.addEventListener('mouseleave', () => endchangeColor('nav-moto'))
-
-// document.body.addEventListener('mousemove', moveBackground);
