@@ -1,29 +1,3 @@
-
-(function() {
-    var lastTime = 0;
-    var vendors = ['ms', 'moz', 'webkit', 'o'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-      window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-      window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
-    }
-  
-    if (!window.requestAnimationFrame)
-      window.requestAnimationFrame = function(callback, element) {
-        var currTime = new Date().getTime();
-        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-        var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-          timeToCall);
-        lastTime = currTime + timeToCall;
-        return id;
-      };
-  
-    if (!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = function(id) {
-            clearTimeout(id);
-          };
-    }());
-    console.log("WHJSKHDJKSHEKJHEH")
-
 const c = document.createElement("canvas");
 const ctx = c.getContext("2d");
 const destination = document.getElementById('animatedTextHeading');
@@ -38,6 +12,7 @@ const coin_flip = Math.random();
 
 let mouseXPos, mouseYPos, font_size = max_font_size;
 
+console.log("javascript has updated 1")
 
 const reportWindowSize = () => {
     c.height = destination.clientHeight * canvas_height;
@@ -61,7 +36,7 @@ for (let x = 0; x < columns; x++) {
     drops[x] = 1;
 }
 
-//random color generator
+
 let [r, g, b] = [0, 0, 0];
 let arr = [r, g, b]
 arr[Math.floor(Math.random() * 3)] = 255;
@@ -124,13 +99,15 @@ const checkIfOnScreen = () => {
     const scroll_top_II =  document.body.scrollTop;
     const fraction = 4/6;
     const scrollHeight = () => scroll_top > bottom_of_home * fraction || scroll_top_II > bottom_of_home * fraction ;
-    if (!scrollHeight()) draw();
+    if (!scrollHeight()) requestAnimationFrame(draw);
 }
 
 const userAgent = window.navigator.userAgent;
 
 if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-    destination.style.backgroundColor = 'black';
+    destination.style.background = 'url(https://media.giphy.com/media/3ohzdKgSnQwjEbkxry/giphy.gif) center';
+    destination.style.opacity = '0.75'
+    destination.style.backgroundSize = '120%' ;
 } else {
     setInterval(checkIfOnScreen, 1 / frames_per_second * 1000);
 }
@@ -227,6 +204,3 @@ nav_moto.addEventListener('mouseover', () => changeColor('nav-moto'))
 nav_moto.addEventListener('mouseleave', () => endchangeColor('nav-moto'))
 
 // document.body.addEventListener('mousemove', moveBackground);
-
-
-    

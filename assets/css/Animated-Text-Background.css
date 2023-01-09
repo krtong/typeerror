@@ -1,17 +1,19 @@
 #animatedTextBackground {
   height: 50%;
+  visibility: hidden;
 }
 
 #animatedTextHeading {
   -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text !important;
+  -webkit-background-clip: text;
+  -webkit-background-origin: padding-box;
   font-size: 16vmax;
   line-height: .8em;
   letter-spacing: -1vmax;
   font-family: 'Arbutus Slab', serif;
   font-weight: 900;
   background: url("https://cdn.bootstrapstudio.io/placeholders/1400x800.png") center / cover repeat-x, rgb(77,62,70);
-}
+  }
 
 .nav-item {
   padding: 1vw;

@@ -1,4 +1,30 @@
+(function() {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+      window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+      window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+  
+    if (!window.requestAnimationFrame)
+      window.requestAnimationFrame = function(callback, element) {
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+        var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+          timeToCall);
+        lastTime = currTime + timeToCall;
+        return id;
+      };
+  
+    if (!window.cancelAnimationFrame)
+      window.cancelAnimationFrame = function(id) {
+        clearTimeout(id);
+      };
+}());
+  
+
 const c = document.createElement("canvas");
+c.style.display = "block";
 const ctx = c.getContext("2d");
 const destination = document.getElementById('animatedTextHeading');
 const div = document.getElementById('animatedTextBackground')
@@ -9,9 +35,11 @@ const scroll_speed = 10;
 const [canvas_width, canvas_height] = [.5, 1] //if dropping frame rates, make the canvas smaller
 const frames_per_second = 20;
 const coin_flip = Math.random();
-
+let counter = 0;
+let counter2 = 0;
 let mouseXPos, mouseYPos, font_size = max_font_size;
 
+console.log("javascript has updated 2")
 
 const reportWindowSize = () => {
     c.height = destination.clientHeight * canvas_height;
@@ -35,7 +63,6 @@ for (let x = 0; x < columns; x++) {
     drops[x] = 1;
 }
 
-
 let [r, g, b] = [0, 0, 0];
 let arr = [r, g, b]
 arr[Math.floor(Math.random() * 3)] = 255;
@@ -43,9 +70,18 @@ arr[Math.floor(Math.random() * 3)] = 255;
 [r, g, b] = arr;
 
 let overButton = false;
+const FRAME_RATE_LIMIT = 25; // Limit the frame rate to 60 fps
+let previousFrameTime = 0;
 
-const draw = () => {
-
+function draw() {
+  const currentTime = Date.now();
+  if (currentTime - previousFrameTime < 1000 / FRAME_RATE_LIMIT) {
+    // Skip this frame if the frame rate exceeds the limit
+    counter2++
+    requestAnimationFrame(draw);
+    return;
+  }
+  previousFrameTime = currentTime;
     const darken = 10;
     const darkenMore = 5
     const color = (a, b) => parseInt((a - b) / darken) - darkenMore;
@@ -58,7 +94,7 @@ const draw = () => {
         if (b < max && r <= min) b += speed;
         if (g >= max && r > min) r -= speed;
         if (b >= max && g > min) g -= speed;
-        if (r >= max && b > min) b -= speed;
+        if (b >= max && r > min) b -= speed;
     }
 
     colorShift(1, 40);
@@ -84,39 +120,26 @@ const draw = () => {
         ctx.fillText(text, i * font_size, drops[i] * font_size);
         if (drops[i] * font_size > c.height && Math.random() > 0.975) drops[i] = 0;
         drops[i]++;
-    };
+    }
 
     const bgImage = `url(${c.toDataURL('jpeg/image')}`;
     destination.style.background = bgImage;
     destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
+   
+    // schedule the next frame to be drawn
+        // if (counter > )
+       
+        console.log(counter2 / (counter * 20)* 1000); //frame rate is currently around 135-140 FPS. How do i drop the frame rate?
+        requestAnimationFrame(draw);
 }
 
 
-const bottom_of_home = document.getElementById('home').offsetHeight;
-const checkIfOnScreen = () => {
-    const scroll_top = document.documentElement.scrollTop;
-    const scroll_top_II =  document.body.scrollTop;
-    const fraction = 4/6;
-    const scrollHeight = () => scroll_top > bottom_of_home * fraction || scroll_top_II > bottom_of_home * fraction ;
-    if (!scrollHeight()) draw();
-}
-
-const userAgent = window.navigator.userAgent;
-
-if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-    destination.style.background = 'url(https://media.giphy.com/media/3ohzdKgSnQwjEbkxry/giphy.gif) center';
-    destination.style.opacity = '0.75'
-    destination.style.backgroundSize = '120%' ;
-} else {
-    setInterval(checkIfOnScreen, 1 / frames_per_second * 1000);
-}
+setInterval(() => counter++, 50);
 
 
-const moveBackground = (e) => {
-    mouseXPos = (window.innerWidth - e.x) / 5
-    mouseYPos = (e.y / window.innerHeight) * 1000
-    destination.style.backgroundPosition = `${mouseXPos / scroll_speed}% ${mouseYPos / scroll_speed}%`;
-}
+// start the animation loop
+requestAnimationFrame(draw);
+
 
 let nav_info = document.getElementById('nav-info');
 let nav_work = document.getElementById('nav-work');
@@ -201,5 +224,3 @@ nav_skills.addEventListener('mouseleave', () => endchangeColor('nav-skills'))
 
 nav_moto.addEventListener('mouseover', () => changeColor('nav-moto'))
 nav_moto.addEventListener('mouseleave', () => endchangeColor('nav-moto'))
-
-// document.body.addEventListener('mousemove', moveBackground);
