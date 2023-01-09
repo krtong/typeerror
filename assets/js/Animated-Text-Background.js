@@ -106,7 +106,7 @@ const userAgent = window.navigator.userAgent;
 if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
     destination.style.backgroundColor = 'black';
 } else {
-    setInterval(checkIfOnScreen, 1 / frames_per_second * 1000);
+    requestAnimationFrame(checkIfOnScreen, 1 / frames_per_second * 1000);
 }
 
 
